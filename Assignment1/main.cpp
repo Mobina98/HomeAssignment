@@ -1,11 +1,11 @@
-// Mobina Ahmadimasoud | st067173@student.spbu.ru
-
-#include "sayhello.hpp"
 #include <iostream>
-
+#include "hello.h"
 int main() {
-	std::string name = "Timur Rafikov";
-	hello(name);
-	sayhello();
-	return 0;
+    setlocale(LC_ALL, "English");
+    std::cout << "Hello World!\n";
+    while (true) {
+        std::string input = hello();
+        std::cout << "Hello " + input + "!\n";
+    }
+
 }
