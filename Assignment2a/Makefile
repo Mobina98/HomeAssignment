@@ -1,16 +1,10 @@
-CC=g++
-CFLAGS=-c -Wall
-LDFLAGS=
-SOURCES=assignment2a.cpp
-OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE= assignment2a
+all: app
 
-all: $(SOURCES) $(EXECUTABLE)
+app: main.o
+	g++ main.o -o app
 
-$(EXECUTABLE): $(OBJECTS)
-	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+main.o: main.cpp
+	g++ -c main.cpp
 
-.cpp.o:
-	$(CC) $(CFLAGS) $< -o $@
 clean:
-	rm -rf *.o $(EXECUTABLE) output_file.bin
+	rm -rf *.o app
