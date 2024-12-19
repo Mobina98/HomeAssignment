@@ -20,7 +20,7 @@ public:
 	//Transformer(std::string name = "Untitled", uint level = 0, uint strength = 0, uint fuel = 0, uint ammo = 0);
 	Transformer(const std::string &name, const uint &level, const uint &strength, const uint &fuel, const uint &ammo);
 	Transformer(const std::string &name);
-	Transformer();
+	
 	~Transformer();
 
 	void setName(const std::string &name);

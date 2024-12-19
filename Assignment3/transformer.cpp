@@ -5,14 +5,6 @@
 
 #include "transformer.hpp"
 
-/*Transformer::Transformer(std::string name, uint level, uint strength, uint fuel, uint ammo) {
-	_name = name;
-	_level = level;
-	_strength = strength;
-	_fuel = fuel;
-	_ammo = ammo;
-	std::cout << "Transformer " << name << " has been created!\n";
-}*/
 Transformer::Transformer(const std::string &name, const uint &level, const uint &strength, const uint &fuel, const uint &ammo) :
 	_name(name),
 	_level(level),
@@ -27,9 +19,6 @@ Transformer::Transformer(const std::string &name) :
 	Transformer(name, 0, 0, 0, 0)
 {}
 
-Transformer::Transformer() :
-	Transformer("Untitled", 0, 0, 0, 0)
-{}
 
 Transformer::~Transformer() {
 	std::cout << "Transformer " << _name << " has been eliminated\n";

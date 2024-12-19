@@ -5,12 +5,12 @@
 
 #include "revpolnot.hpp"
 
-void push(double *stack, double **p, double el) { // Add an element to the stack and move the pointer
+void push(double *stack, double **p, double el) { 
 	*p = *p + 1;
 	**p = el;
 }
 
-double pop(double *stack, double **p) { // Removing an element from the stack and returning it
+double pop(double *stack, double **p) {
 	double res = **p;
 	*p = *p - 1;
 	return res;
@@ -20,9 +20,9 @@ bool issign(std::string c) {
 	return (c == "+" || c == "-" || c == "*" || c == "/");
 }
 
-double calc(std::stringstream& stream) { // The main function of the algorithm reverse polish notation
-	double *stack = new double[1000]; // Declaration stack
-	double *p = (stack - 1); // The pointer points to the top of the stack
+double calc(std::stringstream& stream) { 
+	double *stack = new double[1000]; 
+	double *p = (stack - 1); 
 
 	std::string c;
 	while (stream >> c) {
