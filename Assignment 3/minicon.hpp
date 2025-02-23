@@ -5,18 +5,15 @@
 
 #ifndef MINICON
 #define MINICON
-
+#include "weapon.h"
 #include "transformer.hpp"
-#include "instrument.hpp"
+
 
 class Minicon: public Transformer {
-private:
-	Instrument* _pickaxe;
-	uint _energy;
-	uint _size;
+
 public:
-	Minicon(const std::string &name, Instrument* pickaxe, const uint &energy, const uint &size);
-	Minicon(const std::string &name, Instrument* pickaxe);
+	Minicon(const std::string &name, const uint &level, Weapon &blaster, const uint &strength,
+const uint &fuel, const uint &ammo);
 
 	bool work();
 
@@ -25,6 +22,9 @@ public:
 
 	uint getEnergy();
 	uint getSize();
+private:
+	uint _energy;
+	uint _size;
 };
 
 #endif

@@ -4,23 +4,19 @@
  */
 
 #include "minicon.hpp"
+#include "weapon.h"
 
-Minicon::Minicon(const std::string &name, Instrument* pickaxe, const uint &energy, const uint &size) :
-	Transformer(name),
-	_pickaxe(pickaxe),
-	_energy(energy),
-	_size(size)	
+Minicon::Minicon(const std::string &name, const uint &level, Weapon &blaster, const uint &strength,
+const uint &fuel, const uint &ammo) : Transformer(name, level, blaster, strength, fuel, ammo)
 {
+	setEnergy(1);
+	setSize(3);
 	std::cout << "Minicon " << name << " has been created!\n";
 }
 
-Minicon::Minicon(const std::string &name, Instrument* pickaxe) :
-	Minicon(name, pickaxe, 0, 0)
-{}
-
 
 bool Minicon::work() {
-	return _pickaxe->use();
+	return true;
 }
 
 

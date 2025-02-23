@@ -1,6 +1,6 @@
 # Assignment5
 ## Author
-Mobina Ahmadimasoud, group 24.Б83-mm
+Mobina Ahmadimasoud, group 24.B83-mm
 ## Contacts
 st067173@student.spbu.ru  
 ## Description

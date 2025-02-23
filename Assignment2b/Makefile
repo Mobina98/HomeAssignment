@@ -1,13 +1,16 @@
-all: app
+CC=g++
+CFLAGS=-c -Wall
+LDFLAGS=
+SOURCES=assignment2b.cpp
+OBJECTS=$(SOURCES:.cpp=.o)
+EXECUTABLE=assignment2b
 
-app: main.o revpolnot.o
-	g++ main.o revpolnot.o -o app
+all: $(SOURCES) $(EXECUTABLE)
 
-main.o: main.cpp
-	g++ -c main.cpp
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
 
-revpolnot.o: revpolnot.cpp
-	g++ -c revpolnot.cpp
-
+.cpp.o:
+	$(CC) $(CFLAGS) $< -o $@
 clean:
-	rm -rf *.o app
+	rm -rf *.o $(EXECUTABLE)
