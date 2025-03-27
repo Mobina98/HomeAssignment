@@ -1,21 +1,13 @@
-# Assignment4
+# Assigment 4
 ## Author
-Mobina Ahmadimasoud, group 24.Б83-mm
+** Mobina Ahmadimasoud, group B83-mm**
 ## Contacts
-st067173@student.spbu.ru  
+st067173@student.spbu.ru
 ## Description
-Four classes are demonstrated, three of which (Autobot, Decepticon, Minecon) are inherited from the Transformer class.  
- Each class corresponds to cpp (implementation) and hpp (header) files.  
-  In main.cpp we can see the operation of the objects of each of the classes  
-  
-Comparison operators have been added and the output stream operator has been redefined in each of the classes  
-## Build app
+Create a hierarchy of transformers with overload constructor and operators
+## Build
 make
-## Run app
-./app
-## Build test
-make test
-## Run test
-./test-app
-## Clean
-make clean
+## Run
+./tests
+## Format
+make format
