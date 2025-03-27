@@ -1,48 +1,30 @@
-PROJECT = app
+CC=g++
+CFLAGS=-Werror -Wpedantic -Wall -std=c++17
+LDFLAGS=-lgtest -lgtest_main -lpthread
+SOURCES=gun_type.cpp shooter.cpp transformer.cpp sniper.cpp medic.cpp bazookron.cpp voice.cpp tests.cpp
+HEADERS=gun_type.h shooter.h transformer.h sniper.h medic.h bazookron.h voice.h
+OBJECTS=$(SOURCES:.cpp=.o)
+EXECUTABLE=tests
 
-LIBPROJECT = $(PROJECT).a
+all: $(EXECUTABLE)
 
-TESTPROJECT = test-$(PROJECT)
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(OBJECTS) $(CFLAGS) $(LDFLAGS) -o $@
 
-CXX = g++
+%.o: %.cpp
+	$(CC) $(CFLAGS) -c $< -o $@
 
-A = ar
 
-AFLAGS = rsv
+dependencies: $(SOURCES) $(HEADERS)
+	$(CC) -MM $(SOURCES) > dependencies.mk
 
-CXXFLAGS = -I. -std=c++17 -Wall -Werror -Wpedantic -g -fPIC
+-include dependencies.mk
 
-LDXXFLAGS = $(CXXFLAGS) -L. -l:$(LIBPROJECT)
-
-LDGTESTFLAGS = $(LDXXFLAGS) -lgtest -lgtest_main -lpthread
-
-DEPS = $(wildcard *.hpp)
-SRC = $(filter-out main.cpp, $(wildcard *.cpp))
-OBJ = $(filter-out test.o, $(patsubst %.cpp, %.o, $(SRC)))
-
-TESTOBJ = test.o
-
-.PHONY: default
-
-default: all;
-
-%.o: %.cpp $(DEPS)
-	$(CXX) -c -o $@ $< $(CXXFLAGS)
-
-$(LIBPROJECT) : $(OBJ)
-	$(A) $(AFLAGS) $@ $^
-
-$(PROJECT) : main.o $(LIBPROJECT)
-	$(CXX) -o $@ main.o $(LDXXFLAGS)
-
-$(TESTPROJECT) : $(LIBPROJECT) $(TESTOBJ)
-	$(CXX) $(TESTOBJ) -o $@ $(LDGTESTFLAGS)
-
-test: $(TESTPROJECT)
-
-all: $(PROJECT)
+format:
+	astyle -A1 -s4 *.cpp *.h
+	rm -rf *.orig
 
 .PHONY: clean
 
 clean:
-	rm $(PROJECT) $(TESTPROJECT) $(LIBPROJECT) *.o 
+	rm -rf $(EXECUTABLE) $(OBJECTS) *.mk
