@@ -35,8 +35,12 @@ float calculatePolishEntry(std::string input) {
                     }
                 stack[++top] = b / a; break;
             }
+            /* In case of division or subtraction, I'll leave a hint: in the example "3 - 4"
+                I thought it would be more correct to pass the operands as "3 4 -"
+                Where the first will be the number from which they subtract, and the second as the subtrahend.
+                Because doing the opposite will be intuitively unclear
+            */
         }
-    
     }
     return stack[top];
 }

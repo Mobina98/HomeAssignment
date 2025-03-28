@@ -1,91 +1,148 @@
-/* Author: Mobina Ahmadimasoud
- * e-mail: st067173@student.spbu.ru
- * Assignment3: Transformers classes
- */
-
-#include "transformer.hpp"
-#include "weapon.h"
+#include <iostream>
+#include "transformer.h"
+#include "voice.h"
 
 
-Transformer::Transformer(const std::string &name, const uint &level, Weapon &weapon, const uint &strength,
-                         const uint &fuel, const uint &ammo) : _name(name),_weapon(weapon),
-                                                               _strength(strength), _fuel(fuel), _ammo(ammo) {
-
-    _level = new uint(level);
-    std::cout << "Transformer " << name << " has been created!\n";
+Transformer::Transformer(const std::string &name, const std::string &fraction, const int &health,
+                         const std::string &gun_type, const int &damage, const
+                         int &ammo, const int &move_speed, const Voice &voice) {
+    set_name(name);
+    set_health(health);
+    set_gun_type(gun_type);
+    set_damage(damage);
+    set_ammo(ammo);
+    set_move_speed(move_speed);
+    set_fraction(fraction);
+    _voice = new Voice(voice);
+    std::cout << name << " was created" << std::endl;
 }
 
-Transformer::Transformer(const std::string &name, Weapon &weapon, const uint &strength,
-                         const uint &fuel, const uint &ammo) : _name(name), _weapon(weapon),
-                                                               _strength(strength), _fuel(fuel), _ammo(ammo) {
-    std::cout << "Transformer " << name << " has been created!\n";
+
+Transformer::Transformer(const std::string &name, const std::string &fraction, const int &health,
+                         const std::string &gun_type, const int &damage, const
+                         int &ammo, const int &move_speed) {
+    set_name(name);
+    set_health(health);
+    set_gun_type(gun_type);
+    set_damage(damage);
+    set_ammo(ammo);
+    set_move_speed(move_speed);
+    set_fraction(fraction);
+    _voice = nullptr;
+    std::cout << name << " was created" << std::endl;
 }
 
 
 Transformer::~Transformer() {
-    delete _level;
-    std::cout << "Transformer " << _name << " has been eliminated\n";
+    delete _voice;
+    _voice = nullptr;
+    std::cout << get_name() << " was destroyed" << std::endl;
 }
 
 
-void Transformer::setName(const std::string &name) {
-    _name = name;
-}
+bool Transformer::transform() const {
+    std::cout << get_name() << " transforms" << std::endl;
 
-void Transformer::setLevel(const uint &level) {
-    _level = new uint(level);
-}
-
-void Transformer::setStrength(const uint &strength) {
-    _strength = strength;
-}
-
-void Transformer::setFuel(const uint &fuel) {
-    _fuel = fuel;
-}
-
-void Transformer::setAmmo(const uint &ammo) {
-    _ammo = ammo;
+    return true;
 }
 
 
-std::string Transformer::getName() {
+bool Transformer::attack() const {
+    std::cout << get_name() << " attacks with " << get_gun_type() << std::endl;
+
+    return true;
+}
+
+
+bool Transformer::move() const {
+    std::cout << get_name() << " moves" << std::endl;
+
+    return true;
+}
+
+bool Transformer::jump() const {
+    std::cout << get_name() << " jumps" << std::endl;
+    return true;
+}
+
+bool Transformer::ultimate() {
+    std::cout << "Transformer ultimates" << std::endl;
+
+    return true;
+}
+
+
+bool Transformer::phrase() {
+    std::cout << "Today you will die!" << std::endl;
+
+    return true;
+}
+
+std::string Transformer::get_name() const {
     return _name;
 }
 
-uint* Transformer::getLevel() {
-    return _level;
+void Transformer::set_name(std::string name) {
+    _name = std::move(name);
 }
 
-uint Transformer::getStrength() {
-    return _strength;
+unsigned int Transformer::get_health() const {
+    return _health;
 }
 
-uint Transformer::getFuel() {
-    return _fuel;
+void Transformer::set_health(unsigned int health) {
+    _health = health;
 }
 
-uint Transformer::getAmmo() {
+std::string Transformer::get_gun_type() const {
+    return _gun_type;
+}
+
+void Transformer::set_gun_type(std::string gun_type) {
+    _gun_type = std::move(gun_type);
+}
+
+unsigned int Transformer::get_damage() const {
+    return _damage;
+}
+
+void Transformer::set_damage(unsigned int damage) {
+    _damage = damage;
+}
+
+unsigned int Transformer::move_speed() const {
+    return _move_speed;
+}
+
+void Transformer::set_move_speed(unsigned int move_speed) {
+    _move_speed = move_speed;
+}
+
+unsigned int Transformer::get_ammo() const {
     return _ammo;
 }
 
-Weapon Transformer::get_weapon() const {
-    return _weapon;
+void Transformer::set_ammo(unsigned int ammo) {
+    _ammo = ammo;
 }
 
-void Transformer::set_weapon(const Weapon &weapon) {
-    _weapon = weapon;
+std::string Transformer::get_fraction() const {
+    return _fraction;
 }
 
 
-bool Transformer::fire() {
-    return true;
+void Transformer::set_fraction(std::string fraction) {
+    _fraction = std::move(fraction);
 }
 
-bool Transformer::move() {
-    return true;
+Voice *Transformer::get_voice() const {
+    return _voice;
 }
 
-bool Transformer::jump() {
-    return true;
+void Transformer::set_voice(const Voice &voice) {
+    if (_voice != nullptr) {
+        *_voice = voice;
+        return;
+    }
+    _voice = new Voice(voice);
 }
