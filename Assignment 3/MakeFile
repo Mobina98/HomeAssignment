@@ -1,5 +1,6 @@
 CC=g++
-CFLAGS=-Werror -Wpedantic -Wall -std=c++17
+CFLAGS=-Wpedantic -Wall -std=c++17
+DEBUG_FLAGS=-Werror
 LDFLAGS=-lgtest -lgtest_main -lpthread
 SOURCES=gun_type.cpp shooter.cpp transformer.cpp sniper.cpp medic.cpp bazookron.cpp voice.cpp tests.cpp
 HEADERS=gun_type.h shooter.h transformer.h sniper.h medic.h bazookron.h voice.h
@@ -9,18 +10,19 @@ EXECUTABLE=tests
 all: $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
-	$(CC) $(OBJECTS) $(CFLAGS) $(LDFLAGS) -o $@
+    $(CC) $(OBJECTS) $(CFLAGS) $(LDFLAGS) -o $@
 
 %.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+    $(CC) $(CFLAGS) -c $< -o $@ -MMD
 
+-include $(SOURCES:.cpp=.d)
 
-dependencies: $(SOURCES) $(HEADERS)
-	$(CC) -MM $(SOURCES) > dependencies.mk
+.PHONY: clean check_gtest
 
--include dependencies.mk
+check_gtest:
+    @pkg-config --exists gtest || (echo "gtest not found. Install it first." && exit 1)
 
-.PHONY: clean
+all: check_gtest $(EXECUTABLE)
 
 clean:
-    rm -rf $(EXECUTABLE) $(OBJECTS) *.mk
+    rm -rf $(EXECUTABLE) $(OBJECTS) $(SOURCES:.cpp=.d)
