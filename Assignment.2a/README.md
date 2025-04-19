@@ -1,17 +1,24 @@
 Assignment. 2a
+=============
 
-Mobina Ahmadimasoud
+**Author:** Mobina Ahmadimasoud  
+**Group:** 24.B83-mm  
+**Email:** st067173@student.spbu.ru
 
-Group:24.B83-mm
+## Build Instructions
+```
+make
+```
 
-st067173@student.spbu.ru
+## Run Instructions
+```
+./myProg
+```
 
-Build: make
+## Program Description
+This program reads data from a binary file (`input.bin`), reverses the byte order of the entire file, and writes the reversed data to a new binary file (`output.bin`). The program displays the size of the input file in bytes and includes error handling for file operations.
 
-Run:./myProg
-
-Here i basically opened a binary file, checkedit size and assigned arrays
-
-This file contains my name, group,and email.
-
-please check other commits to understand the content of this project.
+## Implementation Details
+- Uses C++17 features (std::filesystem)
+- Performs in-place array reversal
+- Handles file I/O errors gracefully

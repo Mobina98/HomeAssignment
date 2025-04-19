@@ -1,15 +1,47 @@
-Assignment.2b
+# Assignment 2b - Reverse Polish Notation Calculator
 
-Mobina Ahmadimasoud
+## Author Information
+- **Name:** Mobina Ahmadimasoud
+- **Group:** 24.B83-mm
+- **Email:** st067173@student.spbu.ru
 
-Group:24.B83-mm
+## Program Description
+This program implements a calculator for expressions in Reverse Polish Notation (RPN). In RPN, operators follow their operands, which eliminates the need for parentheses and makes evaluation straightforward using a stack.
 
-st067173@student.spbu.ru
+### Implementation Details
+- The program uses a pointer-based stack implementation
+- Supports basic arithmetic operations: +, -, *, /
+- Handles floating-point numbers
+- Includes error checking for:
+  - Division by zero
+  - Insufficient operands
+  - Invalid input tokens
+  - Stack overflow
 
-Build: make.. to create executable files
+## Building the Program
+```
+make
+```
 
-Run:./myProg
+## Running the Program
+```
+./myProg
+```
 
-This file contains my name, group,and email.
+## Example Usage
+```
+Enter input in R.PNotation: 5 3 +
+Result: 8
 
-please check other commits to understand the content of this project.
+Enter input in R.PNotation: 7 2 * 4 +
+Result: 18
+
+Enter input in R.PNotation: 10 5 / 2 *
+Result: 4
+```
+
+## Cleaning Up
+To remove compiled files:
+```
+make clean
+```

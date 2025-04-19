@@ -7,6 +7,12 @@ int main() {
     const char* inputFile = "input.bin";
     const char* outputFile = "output.bin";
     
+    // Verify input file exists
+    if (!std::filesystem::exists(inputFile)) {
+        std::cerr << "Input file does not exist!" << std::endl;
+        return 1;
+    }
+    
     // Open the binary file using the provided format
     std::ifstream infile;
     infile.open(inputFile, std::ios::binary | std::ios::in);
@@ -25,7 +31,16 @@ int main() {
     char* buffer = new char[fileSize];
 
     // reading file
-    infile.read((char*)buffer, fileSize);
+    infile.read(buffer, fileSize);
+    
+    // Check if read was successful
+    if (!infile) {
+        std::cerr << "Error reading input file!" << std::endl;
+        delete[] buffer;
+        infile.close();
+        return 1;
+    }
+    
     infile.close();
 
     // Reverse the array in-place
@@ -42,7 +57,16 @@ int main() {
         return 1;
     }
 
-    outfile.write((char*)buffer, fileSize);
+    outfile.write(buffer, fileSize);
+    
+    // Check if write was successful
+    if (!outfile) {
+        std::cerr << "Error writing to output file!" << std::endl;
+        delete[] buffer;
+        outfile.close();
+        return 1;
+    }
+    
     outfile.close();
 
     // Clean up allocated memory

@@ -17,7 +17,7 @@ public:
 
     unsigned int get_stabilization() const;
 
-    void set_stablization(unsigned int stabilization);
+    void set_stabilization(unsigned int stabilization);
 
     unsigned int get_points_to_ulta() const;
 

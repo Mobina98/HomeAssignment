@@ -7,5 +7,5 @@
 #include <string>
 #include <filesystem>
 #include <iomanip>
-//#include <alogorithm>
+#include <algorithm>
 #endif

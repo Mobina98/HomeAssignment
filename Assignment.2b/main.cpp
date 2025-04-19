@@ -4,27 +4,25 @@
 int main() 
 {
     const int maxSize = 100;
-    double* stack = new double[maxSize];
-    int top = -1;
-
+    double* stack = new double[maxSize];  // Using a pointer for the stack
+    int top = -1;  // Stack pointer/index
+    
     std::string input;
+    
     std::cout << "Enter input in R.PNotation: "; 
     std::getline(std::cin, input);
 
+    std::istringstream iss(input);
     std::string token;
 
-    for (size_t i = 0; i < input.size(); ++i) 
+    while (iss >> token) 
     {
-        char c = input[i];
-
-        if (c == ' ') continue;
-
-        if (c == '+' || c == '-' || c == '*' || c == '/') 
+        if (token == "+" || token == "-" || token == "*" || token == "/") 
         {
             if (top < 1) 
             {
-                std::cout << "not enough operands for operation " << c << std::endl;
-                delete[] stack;
+                std::cout << "not enough operands for operation " << token << std::endl;
+                delete[] stack;  // Free memory before returning
                 return 0;
             }
 
@@ -32,38 +30,51 @@ int main()
             double a = stack[top--];
 
             double result = 0;
-            switch (c) 
+            switch (token[0]) 
             {
                 case '+': result = a + b; break;
                 case '-': result = a - b; break;
                 case '*': result = a * b; break;
-                case '/': result = a / b; break;
+                case '/': 
+                    if (b == 0) {
+                        std::cout << "Error: Division by zero" << std::endl;
+                        delete[] stack;  // Free memory before returning
+                        return 0;
+                    }
+                    result = a / b; 
+                    break;
             }
 
             stack[++top] = result;
         } 
-        else if (isdigit(c) || c == '-') 
+        else 
         {
-            token.clear();
-            while (i < input.size() && (isdigit(input[i]) || input[i] == '.' || input[i] == '-')) 
-            {
-                token += input[i];
-                ++i;
+            try {
+                double number = std::stod(token);
+                if (top >= maxSize - 1) {
+                    std::cout << "Stack overflow" << std::endl;
+                    delete[] stack;  // Free memory before returning
+                    return 0;
+                }
+                stack[++top] = number;
+            } catch (const std::invalid_argument&) {
+                std::cout << "Invalid token: " << token << std::endl;
+                delete[] stack;  // Free memory before returning
+                return 0;
             }
-            --i;
-            stack[++top] = atof(token.c_str()); //string to double
         }
     }
 
     if (top != 0) 
     {
         std::cout << "incorrect input" << std::endl;
-        delete[] stack;
+        delete[] stack;  // Free memory before returning
         return 0;
     }
 
     std::cout << "Result: " << stack[top] << std::endl;
-
+    
+    // Free the allocated memory
     delete[] stack;
     return 0;
 }

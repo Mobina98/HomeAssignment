@@ -1,25 +1,32 @@
 CC=g++
 CFLAGS=-Werror -Wpedantic -Wall -std=c++17
-LDFLAGS=-lgtest -lgtest_main -lpthread
-SOURCES=gun_type.cpp shooter.cpp transformer.cpp sniper.cpp medic.cpp bazookron.cpp voice.cpp tests.cpp
+LDFLAGS_TEST=-lgtest -lgtest_main -lpthread
+SOURCES=gun_type.cpp shooter.cpp transformer.cpp sniper.cpp medic.cpp bazookron.cpp voice.cpp
+TEST_SOURCES=$(SOURCES) tests.cpp
+MAIN_SOURCES=$(SOURCES) main.cpp
 HEADERS=gun_type.h shooter.h transformer.h sniper.h medic.h bazookron.h voice.h
-OBJECTS=$(SOURCES:.cpp=.o)
-EXECUTABLE=tests
+TEST_OBJECTS=$(TEST_SOURCES:.cpp=.o)
+MAIN_OBJECTS=$(MAIN_SOURCES:.cpp=.o)
+TEST_EXECUTABLE=tests
+MAIN_EXECUTABLE=main
 
-all: $(EXECUTABLE)
+all: $(TEST_EXECUTABLE) $(MAIN_EXECUTABLE)
 
-$(EXECUTABLE): $(OBJECTS)
-	$(CC) $(OBJECTS) $(CFLAGS) $(LDFLAGS) -o $@
+$(TEST_EXECUTABLE): $(TEST_OBJECTS)
+	$(CC) $(TEST_OBJECTS) $(CFLAGS) $(LDFLAGS_TEST) -o $@
+
+$(MAIN_EXECUTABLE): $(MAIN_OBJECTS)
+	$(CC) $(MAIN_OBJECTS) $(CFLAGS) -o $@
 
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
-dependencies: $(SOURCES) $(HEADERS)
-	$(CC) -MM $(SOURCES) > dependencies.mk
+dependencies: $(TEST_SOURCES) $(MAIN_SOURCES) $(HEADERS)
+	$(CC) -MM $(TEST_SOURCES) $(MAIN_SOURCES) > dependencies.mk
 
 -include dependencies.mk
 
 .PHONY: clean
 
 clean:
-	rm -rf $(EXECUTABLE) $(OBJECTS) *.mk
+	rm -rf $(TEST_EXECUTABLE) $(MAIN_EXECUTABLE) $(TEST_OBJECTS) $(MAIN_OBJECTS) *.mk

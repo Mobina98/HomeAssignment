@@ -1,6 +1,7 @@
 #ifndef GUN_TYPE_H
 #define GUN_TYPE_H
 
+#include <string>
 
 class Gun {
 public:

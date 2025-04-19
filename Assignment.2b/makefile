@@ -1,9 +1,14 @@
+CXX = g++
+CXXFLAGS = -Wall -Wextra -std=c++11
+TARGET = myProg
 
-myProg : main.o
-	g++ main.o -o myProg
+all: $(TARGET)
 
-main.o : main.cpp
-	g++ -c main.cpp
+$(TARGET): main.o
+	$(CXX) main.o -o $(TARGET)
 
-clean : 
-	rm -rf myProg *.o
+main.o: main.cpp header.h
+	$(CXX) $(CXXFLAGS) -c main.cpp
+
+clean:
+	rm -rf $(TARGET) *.o

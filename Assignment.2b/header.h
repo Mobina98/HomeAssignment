@@ -5,6 +5,5 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include <stack>
 #include <cstdlib>
 #endif

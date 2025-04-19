@@ -35,25 +35,25 @@ Gun::Gun(const std::string &gun_type, const unsigned int &damage, const unsigned
 
 AKM::AKM(const std::string &name, const unsigned int &damage, const unsigned int &ammo): Gun(name, damage, ammo) {
     set_gun_type(name);
-    set_ammo(damage);
-    set_damage(ammo);
+    set_damage(damage);
+    set_ammo(ammo);
 }
 
 AWP::AWP(const std::string &name, const unsigned int &damage, const unsigned int &ammo): Gun(name, damage, ammo) {
     set_gun_type(name);
-    set_ammo(damage);
-    set_damage(ammo);
+    set_damage(damage);
+    set_ammo(ammo);
 }
 
 Bazooka::Bazooka(const std::string &name, const unsigned int &damage,
                  const unsigned int &ammo): Gun(name, damage, ammo) {
     set_gun_type(name);
-    set_ammo(damage);
-    set_damage(ammo);
+    set_damage(damage);
+    set_ammo(ammo);
 }
 
 Arm::Arm(const std::string &name, const unsigned int &damage, const unsigned int &ammo): Gun(name, damage, ammo) {
     set_gun_type(name);
-    set_ammo(damage);
-    set_damage(ammo);
+    set_damage(damage);
+    set_ammo(ammo);
 }

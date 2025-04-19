@@ -1,9 +1,15 @@
 #include <iostream>
+#include <string>
 
 std::string hello() {
-    setlocale(LC_ALL, "russian");
-    std::cout << __cplusplus << std::endl;
+    std::cout << "Hello, please enter your name: ";
     std::string input;
     std::getline(std::cin, input);
-    return input;
+    return "Hello, " + input + "!";
+}
+
+int main() {
+    std::string greeting = hello();
+    std::cout << greeting << std::endl;
+    return 0;
 }
