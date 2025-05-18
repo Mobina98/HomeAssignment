@@ -10,17 +10,23 @@ public:
 
     ~Medic() = default;
 
+    // Attempts to heal a target (const = doesn't modify object)
     bool heal() const;
 
+    // Ultimate ability - overrides Transformer's version
     bool ultimate() override;
 
 
+    // Returns current medicine supply count
     unsigned int get_medicines() const;
 
+    // Updates medicine inventory
     void set_medicines(unsigned int medicines);
 
+    // Returns ultimate ability charge progress
     unsigned int get_points_to_ulta() const;
 
+    // Sets ultimate ability charge
     void set_points_to_ulta(unsigned int points_to_ulta);
 
 private:
