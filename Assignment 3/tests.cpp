@@ -7,27 +7,29 @@
 #include "bazookron.h"
 #include "medic.h"
 
-
+// Define a test case named 'Gun_type' with a test named 'check_gun_type_class'
 TEST(Gun_type, check_gun_type_class)
 {
-    Gun gun("AKM", 30, 30);
-    EXPECT_EQ(gun.get_gun_type(), "AKM");
-    EXPECT_EQ(gun.get_ammo(), 30);
-    EXPECT_EQ(gun.get_damage(), 30);
-    gun.set_gun_type("AWP");
+    Gun gun("AKM", 30, 30);    // Create a Gun object named "AKM" with 30 ammo and 30 damage
+    EXPECT_EQ(gun.get_gun_type(), "AKM");    // Test (expect) that the gun's type is correctly returned as "AKM"
+    EXPECT_EQ(gun.get_ammo(), 30);    // Test that the ammo count is correctly returned as 30
+    EXPECT_EQ(gun.get_damage(), 30);   // Test that the damage value is correctly returned as 30 
+    gun.set_gun_type("AWP"); // Use setter methods to change the gun's properties   
     gun.set_damage(50);
     gun.set_ammo(45);
-    EXPECT_EQ(gun.get_gun_type(), "AWP");
+    EXPECT_EQ(gun.get_gun_type(), "AWP");    // Test that the new values were set correctly
     EXPECT_EQ(gun.get_damage(), 50);
     EXPECT_EQ(gun.get_ammo(), 45);
 }
 
+// Test case for the base Transformer class parameters (getters/setters)
 TEST(Transformer, check_transformer_parameters)
 {
-    Gun gun("AKM", 30, 90);
+    Gun gun("AKM", 30, 90);  // Create a Gun object for the Transformer to use  
 
-    Transformer transformer("Transformer", "Divine", 200, gun.get_gun_type(), gun.get_damage(), gun.get_ammo(), 100);
+    Transformer transformer("Transformer", "Divine", 200, gun.get_gun_type(), gun.get_damage(), gun.get_ammo(), 100);  // Create a Transformer object, initializing it with various parameters including the gun's stats  
 
+    // Test that all the Transformer's properties were set correctly upon creation
     EXPECT_EQ(transformer.get_name(), "Transformer");
     EXPECT_EQ(transformer.get_fraction(), "Divine");
     EXPECT_EQ(transformer.get_health(), 200);
@@ -36,11 +38,11 @@ TEST(Transformer, check_transformer_parameters)
     EXPECT_EQ(transformer.get_ammo(), gun.get_ammo());
     EXPECT_EQ(transformer.move_speed(), 100);
 
-    gun.set_gun_type("AWP");
+    gun.set_gun_type("AWP");  // Change the properties of the gun  
     gun.set_damage(70);
     gun.set_ammo(30);
 
-    transformer.set_name("Prime");
+    transformer.set_name("Prime");   // Use setter methods to change the Transformer's properties to match the new gun stats and other values 
     transformer.set_fraction("Autobot");
     transformer.set_health(100);
     transformer.set_gun_type(gun.get_gun_type());
@@ -48,7 +50,7 @@ TEST(Transformer, check_transformer_parameters)
     transformer.set_ammo(gun.get_ammo());
     transformer.set_move_speed(130);
 
-    EXPECT_EQ(transformer.get_name(), "Prime");
+    EXPECT_EQ(transformer.get_name(), "Prime");    // Test that all the Transformer's new properties were set correctly
     EXPECT_EQ(transformer.get_fraction(), "Autobot");
     EXPECT_EQ(transformer.get_health(), 100);
     EXPECT_EQ(transformer.get_gun_type(), gun.get_gun_type());
@@ -57,13 +59,14 @@ TEST(Transformer, check_transformer_parameters)
     EXPECT_EQ(transformer.move_speed(), 130);
 }
 
+// Test case for the base Transformer class methods/actions
 TEST(Transformer, check_transformer_methods)
 {
-    Gun gun("AKM", 30, 90);
+    Gun gun("AKM", 30, 90);  // Create a Gun and a Transformer object  
 
     Transformer transformer("Transformer", "Divine", 200, gun.get_gun_type(), gun.get_damage(), gun.get_ammo(), 100);
 
-    EXPECT_TRUE(transformer.transform());
+    EXPECT_TRUE(transformer.transform()); // Test (expect) that various action methods of the Transformer return true, indicating success   
     EXPECT_TRUE(transformer.attack());
     EXPECT_TRUE(transformer.move());
     EXPECT_TRUE(transformer.jump());
@@ -71,16 +74,17 @@ TEST(Transformer, check_transformer_methods)
     EXPECT_TRUE(transformer.phrase());
 }
 
+// Test case for a more complex constructor of Transformer that includes a Voice object
 TEST(Transformer, check_constructor_overloading)
 {
-    Voice voice("English");
+    Voice voice("English"); // Create a Voice object set to "English"   
     Gun gun("AKM", 30, 90);
     Transformer transformer("Transformer", "Divine", 200, gun.get_gun_type(), gun.get_damage(), gun.get_ammo(), 100,
-                            voice);
-    EXPECT_EQ(transformer.get_voice()->get_voice(), voice.get_voice());
-    voice.set_voice("Russian");
-    transformer.get_voice()->set_voice(voice.get_voice());
-    EXPECT_EQ(transformer.get_voice()->get_voice(), voice.get_voice());
+                            voice);  // Create a Transformer using a constructor that also takes a Voice object  
+    EXPECT_EQ(transformer.get_voice()->get_voice(), voice.get_voice());    // Test that the Transformer's voice was correctly initialized
+    voice.set_voice("Russian");    // Change the original voice object's language
+    transformer.get_voice()->set_voice(voice.get_voice());  // Use the Transformer's getter to get its voice object and change its language  
+    EXPECT_EQ(transformer.get_voice()->get_voice(), voice.get_voice());   // Test that the change was successful 
 }
 
 TEST(Shooter, test_class_shooter)
